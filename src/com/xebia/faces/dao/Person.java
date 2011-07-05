@@ -1,18 +1,28 @@
 package com.xebia.faces.dao;
 
-import android.graphics.drawable.Drawable;
 
 public class Person {
-    private final Drawable picture;
+    private final String pictureAssetName;
     private final String name;
 
-    public Person(String name, Drawable picture) {
+    public Person(String name, String picture) {
         this.name = name;
-        this.picture = picture;
+        this.pictureAssetName = picture;
     }
 
-    public Drawable getPicture() {
-        return picture;
+
+    @Override
+    public boolean equals(Object o) {
+        Person otherPerson = (Person) o;
+        return otherPerson.getName().equals(name);
+    }
+    @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
+
+    public String getPictureAssetsName() {
+        return pictureAssetName;
     }
 
     public String getName() {
