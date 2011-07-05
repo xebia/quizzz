@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-    <ImageView android:src="@android:drawable/picture_frame" android:id="@+id/imageView1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_gravity="center"></ImageView>
+    <ImageView android:src="@android:drawable/picture_frame" android:id="@+id/imageView1" android:layout_height="wrap_content" android:layout_gravity="center" android:layout_width="fill_parent"></ImageView>
     <Button android:id="@+id/answer1" android:text="Button" android:layout_height="wrap_content" android:layout_width="fill_parent"></Button>
     <Button android:id="@+id/answer2" android:text="Button" android:layout_height="wrap_content" android:layout_width="fill_parent"></Button>
     <Button android:id="@+id/answer3" android:text="Button" android:layout_height="wrap_content" android:layout_width="fill_parent"></Button>
