@@ -2,5 +2,6 @@ Faces
 =====
 This is a project to help you learn faces of collegues.
 
-It should, in the future, show you a picture an you have to guess the name (multiple choice).
+It is currently a working prototype.
 
+![v0 prototype](https://github.com/xebia/faces/raw/master/doc/v0/question.png)
