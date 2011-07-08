@@ -5,10 +5,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class People extends ArrayList<Person> {
+public class QuizSet extends ArrayList<QuizItem> {
     private static final long serialVersionUID = 2640875173418551093L;
 
-    public List<Person> randomlySelectSomePeople() {
+    public List<QuizItem> randomlySelectSomeItems() {
         Collections.shuffle(this);
         return Arrays.asList(
             this.get(0),

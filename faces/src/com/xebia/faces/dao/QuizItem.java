@@ -1,11 +1,11 @@
 package com.xebia.faces.dao;
 
 
-public class Person {
+public class QuizItem {
     private final String pictureAssetName;
     private final String name;
 
-    public Person(String name, String picture) {
+    public QuizItem(String name, String picture) {
         this.name = name;
         this.pictureAssetName = picture;
     }
@@ -13,8 +13,8 @@ public class Person {
 
     @Override
     public boolean equals(Object o) {
-        Person otherPerson = (Person) o;
-        return otherPerson.getName().equals(name);
+        QuizItem otherItem = (QuizItem) o;
+        return otherItem.getName().equals(name);
     }
     @Override
     public int hashCode() {

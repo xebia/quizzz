@@ -20,24 +20,24 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.xebia.faces.dao.People;
-import com.xebia.faces.dao.Person;
+import com.xebia.faces.dao.QuizItem;
+import com.xebia.faces.dao.QuizSet;
 
 
 public class QuizActivity extends Activity implements OnClickListener {
 
-    Map<Button, Person> buttonPersonMap = new HashMap<Button, Person>();
-    private Person rightPerson;
-    private People people;
+    Map<Button, QuizItem> buttonQuizItemMap = new HashMap<Button, QuizItem>();
+    private QuizItem rightItem;
+    private QuizSet quizSet;
 
     public void onClick(View v) {
 
-        Person choosenPerson = buttonPersonMap.get(v);
+        QuizItem choosenItem = buttonQuizItemMap.get(v);
 
-        if (choosenPerson.equals(rightPerson)) {
+        if (choosenItem.equals(rightItem)) {
             layoutRightResult();
         } else {
-            layoutWrongResult(choosenPerson);
+            layoutWrongResult(choosenItem);
         }
     }
 
@@ -48,10 +48,10 @@ public class QuizActivity extends Activity implements OnClickListener {
         result.setText(R.string.right);
 
         ImageView picture = (ImageView) findViewById(R.id.picture);
-        picture.setImageBitmap(getBitmapFromAsset(rightPerson.getPictureAssetsName()));
+        picture.setImageBitmap(getBitmapFromAsset(rightItem.getPictureAssetsName()));
 
         TextView name = (TextView) findViewById(R.id.name);
-        name.setText(rightPerson.getName());
+        name.setText(rightItem.getName());
 
         Button nextStepButton = (Button) findViewById(R.id.nextStepButton);
         nextStepButton.setText(R.string.next);
@@ -63,24 +63,24 @@ public class QuizActivity extends Activity implements OnClickListener {
         });
     }
 
-    private void layoutWrongResult(final Person wrongPerson) {
+    private void layoutWrongResult(final QuizItem wrongItem) {
         setContentView(R.layout.result);
 
         TextView result = (TextView) findViewById(R.id.result);
         result.setText(R.string.wrong);
 
         ImageView picture = (ImageView) findViewById(R.id.picture);
-        picture.setImageBitmap(getBitmapFromAsset(rightPerson.getPictureAssetsName()));
+        picture.setImageBitmap(getBitmapFromAsset(rightItem.getPictureAssetsName()));
 
         TextView name = (TextView) findViewById(R.id.name);
-        name.setText(rightPerson.getName());
+        name.setText(rightItem.getName());
 
         Button nextStepButton = (Button) findViewById(R.id.nextStepButton);
-        nextStepButton.setText("But then who is: " + wrongPerson.getName() + "?");
+        nextStepButton.setText("But then who is: " + wrongItem.getName() + "?");
         nextStepButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                rightPerson = wrongPerson;
+                rightItem = wrongItem;
                 layoutRightResult();
             }
         });
@@ -103,15 +103,16 @@ public class QuizActivity extends Activity implements OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        people = new People();
+        quizSet = new QuizSet();
 
         try {
-            String[] list = getResources().getAssets().list("people");
+            String[] list = getResources().getAssets().list("sets/Birds of India");
             for (String pictureAssetName:list) {
                 String name = baseNameWithoutExtension(pictureAssetName);
-                people.add(new Person(name, "people/" + pictureAssetName));
+                quizSet.add(new QuizItem(name, "sets/Birds of India/" + pictureAssetName));
             }
         } catch (IOException e) {
+            //Empty quizset
         }
 
         layoutQuestion();
@@ -132,23 +133,23 @@ public class QuizActivity extends Activity implements OnClickListener {
     private void layoutQuestion() {
         setContentView(R.layout.main);
 
-        List<Person> buttonPeople = people.randomlySelectSomePeople();
-        rightPerson = buttonPeople.get(new Random().nextInt(3));
+        List<QuizItem> buttonQuizItems = quizSet.randomlySelectSomeItems();
+        rightItem = buttonQuizItems.get(new Random().nextInt(3));
 
         Button answer1Button = (Button) findViewById(R.id.answer1);
         Button answer2Button = (Button) findViewById(R.id.answer2);
         Button answer3Button = (Button) findViewById(R.id.answer3);
         ImageView picture = (ImageView) findViewById(R.id.picture);
 
-        answer1Button.setText(buttonPeople.get(0).getName());
-        answer2Button.setText(buttonPeople.get(1).getName());
-        answer3Button.setText(buttonPeople.get(2).getName());
+        answer1Button.setText(buttonQuizItems.get(0).getName());
+        answer2Button.setText(buttonQuizItems.get(1).getName());
+        answer3Button.setText(buttonQuizItems.get(2).getName());
 
-        buttonPersonMap.put(answer1Button, buttonPeople.get(0));
-        buttonPersonMap.put(answer2Button, buttonPeople.get(1));
-        buttonPersonMap.put(answer3Button, buttonPeople.get(2));
+        buttonQuizItemMap.put(answer1Button, buttonQuizItems.get(0));
+        buttonQuizItemMap.put(answer2Button, buttonQuizItems.get(1));
+        buttonQuizItemMap.put(answer3Button, buttonQuizItems.get(2));
 
-        picture.setImageBitmap(getBitmapFromAsset(rightPerson.getPictureAssetsName()));
+        picture.setImageBitmap(getBitmapFromAsset(rightItem.getPictureAssetsName()));
 
         answer1Button.setOnClickListener(this);
         answer2Button.setOnClickListener(this);
