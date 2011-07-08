@@ -10,12 +10,12 @@ public class QuizItem {
         this.pictureAssetName = picture;
     }
 
-
     @Override
     public boolean equals(Object o) {
         QuizItem otherItem = (QuizItem) o;
         return otherItem.getName().equals(name);
     }
+
     @Override
     public int hashCode() {
         return name.hashCode();
