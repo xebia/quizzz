@@ -6,7 +6,7 @@
   android:layout_height="match_parent" android:gravity="center">
     <TextView android:textAppearance="?android:attr/textAppearanceLarge" android:layout_height="wrap_content" android:text="TextView" android:layout_width="wrap_content" android:id="@+id/result"></TextView>
     <ImageView android:layout_height="wrap_content" android:src="@android:drawable/picture_frame" android:layout_width="wrap_content" android:id="@+id/picture"></ImageView>
-    <TextView android:textAppearance="?android:attr/textAppearanceMedium" android:layout_height="wrap_content" android:id="@+id/textView2" android:layout_width="wrap_content" android:text="is"></TextView>
+    <TextView android:textAppearance="?android:attr/textAppearanceMedium" android:layout_height="wrap_content" android:id="@+id/textView2" android:layout_width="wrap_content" android:text="corresponds to"></TextView>
     <TextView android:textAppearance="?android:attr/textAppearanceLarge" android:layout_height="wrap_content" android:text="TextView" android:layout_width="wrap_content" android:id="@+id/name"></TextView>
     <Button android:layout_height="wrap_content" android:id="@+id/nextStepButton" android:text="Button" android:layout_width="wrap_content"></Button>
     
