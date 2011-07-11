@@ -21,14 +21,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.xebia.faces.dao.QuizItem;
-import com.xebia.faces.dao.QuizSet;
+import com.xebia.faces.dao.QuizList;
 
 
 public class QuizActivity extends Activity implements OnClickListener {
 
     Map<Button, QuizItem> buttonQuizItemMap = new HashMap<Button, QuizItem>();
     private QuizItem rightItem;
-    private QuizSet quizSet;
+    private QuizList quizSet;
 
     public void onClick(View v) {
 
@@ -103,7 +103,7 @@ public class QuizActivity extends Activity implements OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        quizSet = new QuizSet();
+        quizSet = new QuizList();
 
         try {
             String[] list = getResources().getAssets().list("sets/Birds of India");
@@ -133,8 +133,8 @@ public class QuizActivity extends Activity implements OnClickListener {
     private void layoutQuestion() {
         setContentView(R.layout.main);
 
-        List<QuizItem> buttonQuizItems = quizSet.randomlySelectSomeItems();
-        rightItem = buttonQuizItems.get(new Random().nextInt(3));
+        QuizList buttonQuizItems = quizSet.shuffleAndSelect(3);
+        rightItem = buttonQuizItems.get(new Random().nextInt(buttonQuizItems.size()));
 
         Button answer1Button = (Button) findViewById(R.id.answer1);
         Button answer2Button = (Button) findViewById(R.id.answer2);
