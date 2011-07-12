@@ -1,8 +1,13 @@
 package com.xebia.faces.dao;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import android.content.Context;
+
+import com.xebia.faces.QuizActivity;
 
 public class QuizList {
     private static final long serialVersionUID = 2640875173418551093L;
@@ -31,6 +36,20 @@ public class QuizList {
 
     public int size() {
         return this.items.size();
+    }
+
+    public static QuizList fromAssetsDirectory(Context context, String string) {
+        QuizList quizList = new QuizList();
+        try {
+            String[] list = context.getResources().getAssets().list("sets/Birds of India");
+            for (String pictureAssetName:list) {
+                String name = QuizActivity.baseNameWithoutExtension(pictureAssetName);
+                quizList.add(new QuizItem(name, "sets/Birds of India/" + pictureAssetName));
+            }
+        } catch (IOException e) {
+            //Empty quizset
+        }
+        return quizList;
     }
 
 

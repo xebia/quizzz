@@ -1,7 +1,5 @@
 package com.xebia.faces;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,10 +7,6 @@ import java.util.Random;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -52,7 +46,7 @@ public class QuizActivity extends Activity implements OnClickListener {
         result.setText(R.string.right);
 
         ImageView picture = (ImageView) findViewById(R.id.picture);
-        picture.setImageBitmap(getBitmapFromAsset(rightItem.getPictureAssetsName()));
+        rightItem.setImageBitmapOn(this, picture);
 
         TextView name = (TextView) findViewById(R.id.name);
         name.setText(rightItem.getName());
@@ -74,7 +68,7 @@ public class QuizActivity extends Activity implements OnClickListener {
         result.setText(R.string.wrong);
 
         ImageView picture = (ImageView) findViewById(R.id.picture);
-        picture.setImageBitmap(getBitmapFromAsset(rightItem.getPictureAssetsName()));
+        rightItem.setImageBitmapOn(this, picture);
 
         TextView name = (TextView) findViewById(R.id.name);
         name.setText(rightItem.getName());
@@ -90,35 +84,12 @@ public class QuizActivity extends Activity implements OnClickListener {
         });
     }
 
-    private Bitmap getBitmapFromAsset(String strName) {
-        AssetManager assetManager = getAssets();
-        Bitmap bitmap = null;
-        try {
-            InputStream istr;
-            istr = assetManager.open(strName);
-            bitmap = BitmapFactory.decodeStream(istr);
-        } catch (IOException e) {
-            bitmap = ((BitmapDrawable) getResources().getDrawable(R.drawable.icon)).getBitmap();
-        }
-        return bitmap;
-    }
 
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        quizSet = new QuizList();
-
-        try {
-            String[] list = getResources().getAssets().list("sets/Birds of India");
-            for (String pictureAssetName:list) {
-                String name = baseNameWithoutExtension(pictureAssetName);
-                quizSet.add(new QuizItem(name, "sets/Birds of India/" + pictureAssetName));
-            }
-        } catch (IOException e) {
-            //Empty quizset
-        }
-
+        quizSet = QuizList.fromAssetsDirectory(this, "sets/Birds of India");
         layoutQuestion();
     }
 
@@ -152,14 +123,13 @@ public class QuizActivity extends Activity implements OnClickListener {
         buttonQuizItemMap.put(answer1Button, buttonQuizItems.get(0));
         buttonQuizItemMap.put(answer2Button, buttonQuizItems.get(1));
         buttonQuizItemMap.put(answer3Button, buttonQuizItems.get(2));
-
-        picture.setImageBitmap(getBitmapFromAsset(rightItem.getPictureAssetsName()));
+        rightItem.setImageBitmapOn(this, picture);
 
         answer1Button.setOnClickListener(this);
         answer2Button.setOnClickListener(this);
         answer3Button.setOnClickListener(this);
     }
-    
+
 	// called when the user first presses the menu button
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
