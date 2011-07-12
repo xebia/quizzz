@@ -1,13 +1,11 @@
 package com.xebia.faces;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,13 +16,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.xebia.faces.config.SelectBucket;
+import com.xebia.faces.dao.AssetQuizItem;
 import com.xebia.faces.dao.QuizItem;
 import com.xebia.faces.dao.QuizList;
 
 
 public class QuizActivity extends Activity implements OnClickListener {
 
-    Map<Button, QuizItem> buttonQuizItemMap = new HashMap<Button, QuizItem>();
+    Map<Button, AssetQuizItem> buttonQuizItemMap = new HashMap<Button, AssetQuizItem>();
     private QuizItem rightItem;
     private QuizList quizSet;
 
@@ -91,18 +90,6 @@ public class QuizActivity extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         quizSet = QuizList.fromAssetsDirectory(this, "sets/Birds of India");
         layoutQuestion();
-    }
-
-    public static String baseNameWithoutExtension(String pictureAssetName) {
-        Uri uri = Uri.parse(pictureAssetName);
-        List<String> segments = uri.getPathSegments();
-        String basename = segments.get(segments.size() -1);
-        int lastDot = basename.lastIndexOf('.');
-        if (lastDot < 0) {
-            return pictureAssetName;
-        }
-        String name = basename.substring(0, lastDot);
-        return name;
     }
 
     private void layoutQuestion() {

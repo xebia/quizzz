@@ -7,18 +7,17 @@ import java.util.List;
 
 import android.content.Context;
 
-import com.xebia.faces.QuizActivity;
 
 public class QuizList {
     private static final long serialVersionUID = 2640875173418551093L;
-    private final List<QuizItem> items;
+    private final List<AssetQuizItem> items;
 
-    public QuizList(List<QuizItem> items) {
+    public QuizList(List<AssetQuizItem> items) {
         this.items = items;
     }
 
     public QuizList() {
-        this.items = new ArrayList<QuizItem>();
+        this.items = new ArrayList<AssetQuizItem>();
     }
 
     public QuizList shuffleAndSelect(int number) {
@@ -26,11 +25,11 @@ public class QuizList {
         return new QuizList(items.subList(0, number));
     }
 
-    public QuizItem get(int i) {
+    public AssetQuizItem get(int i) {
         return items.get(i);
     }
 
-    public void add(QuizItem quizItem) {
+    public void add(AssetQuizItem quizItem) {
         items.add(quizItem);
     }
 
@@ -38,13 +37,12 @@ public class QuizList {
         return this.items.size();
     }
 
-    public static QuizList fromAssetsDirectory(Context context, String string) {
+    public static QuizList fromAssetsDirectory(Context context, String directory) {
         QuizList quizList = new QuizList();
         try {
-            String[] list = context.getResources().getAssets().list("sets/Birds of India");
-            for (String pictureAssetName:list) {
-                String name = QuizActivity.baseNameWithoutExtension(pictureAssetName);
-                quizList.add(new QuizItem(name, "sets/Birds of India/" + pictureAssetName));
+            String[] list = context.getResources().getAssets().list(directory);
+            for (String pictureAssetName : list) {
+                quizList.add(new AssetQuizItem(directory + "/" + pictureAssetName));
             }
         } catch (IOException e) {
             //Empty quizset
