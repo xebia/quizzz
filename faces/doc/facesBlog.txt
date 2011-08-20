@@ -1,0 +1,60 @@
+My first Android app
+====================
+
+Introduction
+------------
+With everybody going mobile, we could not stay behind. This meant we had
+to create an Android application, because we do not own one of them fancy iPhones.
+Also, Android is way cooler.
+
+To begin our journey to become an Android developer, we decided to
+create Faces: a quizz to help you learn the names of your collegues. This
+would give us a simple application that would require only a small subset of the Android API. We also wanted to fammiliarize ourselves with the Android development cycle
+from interaction design to development, testing, and deployment.
+
+After installing the [Android development
+environment](http://developer.android.com/index.html) we where faced
+with the problem of designing our application.
+
+Design
+------
+The idea of Faces is to show a screen with a picture from our facebook and then provide the user with three names to choose from. On a whiteboard it looks like this:
+
+<IMAGE HERE>
+
+The top left part shows the starting screen: three buttons with random names of
+collegues, one of which is the name of the person shown in the picture
+above. If you choose the correct name, you end up in the top right
+screen. If you press the wrong button, you end up in the lower right
+screen which shows you the correct answer and a button that takes you to
+the top right screen where you can see the picture of the collegue you
+have choosen.
+
+We decided to implement the application as a single Activity. Activities
+are subsets of your application which can combine into a one workflow by
+going from one activity to another. The back button on the phone takes you to the previous activity (not necessarily the previous content of the screen) so Activities limit the way the user can navigate through the app. Because there is no back
+functionality in our application, we decided to create the whole
+thing in one Activity. We use layout switching to present the user
+with different screens.
+
+Code
+----
+To download the code, visit http://github.com/xebia/faces and clone the
+repository.
+
+We defined two layouts, main.xml and result.xml. The first shows the
+left side of the design and the second the right part of the design (see picture below). 
+
+<IMAGE with arrows indicating the different areas, or better still, show two screenshots>
+
+If you start the app QuizActivity is started. The Android framework calls the onCreate() method to do the required initialization. In our case this includes loading a set of images from a directory. We choose a list of birds common to India as a sample set, but any set of pictures will do. The last act of onCreate() is to call layoutQuestion(). This method randomly selects three images from the set loaded before, assigns them to buttons and then hooks up itself in the setOnClickListener() method of each button.  
+The buttons are stored in a HashMap<Button, AssetQuizItem> so they can be retrieved later in the onClick() method
+
+onClick() uses the clicked button as an index in the HashMap mentioned above to find the answer that was choosen by the users and delegates to either layoutIfAnswerIsCorrect() or layoutIfAnswerIsWrong(). Both methods fill in data on a new view based on the answer supplied by the user. The methods end with a block of code that sets up a new Button and a listener to allow the user to take the next step. 
+
+TODO: menu button…
+
+Result
+------
+- Deploy to your phone
+- How to make screenshot
