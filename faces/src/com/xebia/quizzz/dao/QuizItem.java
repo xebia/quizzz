@@ -1,4 +1,4 @@
-package com.xebia.faces.dao;
+package com.xebia.quizzz.dao;
 
 import android.content.Context;
 import android.widget.ImageView;

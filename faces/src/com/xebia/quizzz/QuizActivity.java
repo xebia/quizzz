@@ -1,24 +1,21 @@
-package com.xebia.faces;
+package com.xebia.quizzz;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.xebia.faces.config.SelectBucket;
-import com.xebia.faces.dao.AssetQuizItem;
-import com.xebia.faces.dao.QuizItem;
-import com.xebia.faces.dao.QuizList;
+import com.xebia.quizzz.R;
+import com.xebia.quizzz.dao.AssetQuizItem;
+import com.xebia.quizzz.dao.QuizItem;
+import com.xebia.quizzz.dao.QuizList;
 
 /**
  * Set up Quiz, show views and handle user input
@@ -117,30 +114,5 @@ public class QuizActivity extends Activity implements OnClickListener {
 		answer1Button.setOnClickListener(this);
 		answer2Button.setOnClickListener(this);
 		answer3Button.setOnClickListener(this);
-	}
-
-	// called when the user first presses the menu button
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add("select album");
-		return super.onCreateOptionsMenu(menu);
-	}
-
-	// called when the user selects the option in the menu
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		startActivityForResult(new Intent(this, SelectBucket.class), 0);
-		return super.onOptionsItemSelected(item);
-	}
-
-	// called when the selectbucket activity returns
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (resultCode == RESULT_CANCELED) {
-			return;
-		}
-		int bucketid = resultCode;
-		// only show images in this bucket
-		super.onActivityResult(requestCode, resultCode, data);
 	}
 }

@@ -1,4 +1,4 @@
-package com.xebia.faces.dao;
+package com.xebia.quizzz.dao;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,7 +12,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.widget.ImageView;
 
-import com.xebia.faces.R;
+import com.xebia.quizzz.R;
 
 
 public class AssetQuizItem implements QuizItem {
