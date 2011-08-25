@@ -8,7 +8,7 @@ to create an Android application, because we do not own one of them fancy iPhone
 Also, Android is way cooler.
 
 To begin our journey to become an Android developer, we decided to
-create Faces: a quizz to help you learn the names of your collegues. This
+create Quizzz: a quizz to help you learn the names of your collegues (or TODO>>>>). This
 would give us a simple application that would require only a small subset of the Android API. We also wanted to fammiliarize ourselves with the Android development cycle
 from interaction design to development, testing, and deployment.
 
@@ -18,7 +18,7 @@ with the problem of designing our application.
 
 Design
 ------
-The idea of Faces is to show a screen with a picture from our facebook and then provide the user with three names to choose from. On a whiteboard it looks like this:
+The idea of Quizzz is to show a screen with a picture, from our Xebia facebook originally, and then provide the user with three names to choose from. On a whiteboard it looks like this:
 
 <IMAGE HERE>
 
@@ -39,7 +39,7 @@ with different screens.
 
 Code
 ----
-To download the code, visit http://github.com/xebia/faces and clone the
+To download the code, visit http://github.com/xebia/quizzz and clone the
 repository.
 
 We defined two layouts, main.xml and result.xml. The first shows the
