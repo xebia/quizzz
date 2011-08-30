@@ -9,4 +9,3 @@ We plan to add the following functions (list is in no particular order):
 - build the app with Maven.
 - find out how to unit/integration test Android 
 
-![v0 prototype](https://github.com/xebia/faces/raw/master/faces/doc/v0/question.png)
